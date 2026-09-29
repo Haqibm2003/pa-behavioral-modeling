@@ -1,0 +1,197 @@
+{
+  "setup": {
+    "samples": 32768,
+    "occupied_fraction": 0.125,
+    "papr_db": 10.070738088590405,
+    "backoff_db": 12.0,
+    "envelope_peak": 0.800823676079252,
+    "raw_acpr_dbc": -39.73570252711756
+  },
+  "models": [
+    {
+      "model": "MP (K=[1] M=1, 1 coeff)",
+      "family": "memory polynomial",
+      "parameters": 1,
+      "train_nmse_db": -29.27415937068263,
+      "test_nmse_db": -29.21865578803513,
+      "condition_number": 1.0
+    },
+    {
+      "model": "MP (K=[1,3] M=2, 4 coeff)",
+      "family": "memory polynomial",
+      "parameters": 4,
+      "train_nmse_db": -42.2414631018487,
+      "test_nmse_db": -42.607073693850246,
+      "condition_number": 29.97045337442881
+    },
+    {
+      "model": "MP (K=[1,3,5,7] M=2, 8 coeff)",
+      "family": "memory polynomial",
+      "parameters": 8,
+      "train_nmse_db": -63.31558025704638,
+      "test_nmse_db": -63.21090340325292,
+      "condition_number": 1371.146003282812
+    },
+    {
+      "model": "MP (K=[1,3,5,7] M=5, 20 coeff)",
+      "family": "memory polynomial",
+      "parameters": 20,
+      "train_nmse_db": -73.01334680910803,
+      "test_nmse_db": -73.67933759920986,
+      "condition_number": 620724.6919764214
+    },
+    {
+      "model": "MP (K=[1,3,5,7,9,11] M=5, 30 coeff)",
+      "family": "memory polynomial",
+      "parameters": 30,
+      "train_nmse_db": -74.106346488236,
+      "test_nmse_db": -74.36427177698764,
+      "condition_number": 37707415.213274635
+    },
+    {
+      "model": "MP (K=[1,3,5,7,9,11,13,15] M=5, 40 coeff)",
+      "family": "memory polynomial",
+      "parameters": 40,
+      "train_nmse_db": -74.1306921892913,
+      "test_nmse_db": -74.34112159362708,
+      "condition_number": 2925287721.152996
+    },
+    {
+      "model": "TDNN (M=5 hidden=8x8, 298 params)",
+      "family": "neural network",
+      "parameters": 298,
+      "train_nmse_db": -49.80062973407604,
+      "test_nmse_db": -48.46532964636852,
+      "fit_seconds": 14.055824756622314
+    },
+    {
+      "model": "TDNN (M=5 hidden=16x16, 722 params)",
+      "family": "neural network",
+      "parameters": 722,
+      "train_nmse_db": -53.677633222560424,
+      "test_nmse_db": -52.56511146838635,
+      "fit_seconds": 22.32096219062805
+    },
+    {
+      "model": "TDNN (M=5 hidden=24x24, 1274 params)",
+      "family": "neural network",
+      "parameters": 1274,
+      "train_nmse_db": -54.94844260492659,
+      "test_nmse_db": -54.17214885635428,
+      "fit_seconds": 35.40295100212097
+    },
+    {
+      "model": "TDNN (M=5 hidden=32x32, 1954 params)",
+      "family": "neural network",
+      "parameters": 1954,
+      "train_nmse_db": -57.99741321732061,
+      "test_nmse_db": -55.57937006454392,
+      "fit_seconds": 69.08930349349976
+    }
+  ],
+  "sharpness_sweep": [
+    {
+      "smoothness": 1.0,
+      "mp7": -67.50019817823569,
+      "mp11": -69.72390848967146,
+      "mp15": -69.7091662749202
+    },
+    {
+      "smoothness": 2.0,
+      "mp7": -73.67933759920986,
+      "mp11": -74.36427177698764,
+      "mp15": -74.34112159362708
+    },
+    {
+      "smoothness": 4.0,
+      "mp7": -72.42652678414794,
+      "mp11": -75.44681777428185,
+      "mp15": -75.434708282124
+    },
+    {
+      "smoothness": 10.0,
+      "mp7": -69.0470551885172,
+      "mp11": -75.46186667360357,
+      "mp15": -75.58256089331171
+    }
+  ],
+  "dpd": {
+    "iterations": [
+      {
+        "iteration": 1,
+        "acpr_lower": -66.44335040976999,
+        "acpr_upper": -65.49005625505073,
+        "inverse_nmse": -65.94606144501319
+      },
+      {
+        "iteration": 2,
+        "acpr_lower": -65.56760719109765,
+        "acpr_upper": -65.4958469415241,
+        "inverse_nmse": -56.39281925000657
+      },
+      {
+        "iteration": 3,
+        "acpr_lower": -64.08555857812964,
+        "acpr_upper": -63.91497292949998,
+        "inverse_nmse": -52.72840294908468
+      },
+      {
+        "iteration": 4,
+        "acpr_lower": -63.54108272261372,
+        "acpr_upper": -63.30036208720172,
+        "inverse_nmse": -51.62313789856207
+      }
+    ],
+    "raw_acpr_dbc": -39.63325541125964,
+    "dpd_acpr_dbc": -63.16272255081778,
+    "linearisation_nmse_db": -36.60014701678619
+  },
+  "backoff_sweep": {
+    "backoff_db": [
+      4.0,
+      5.0,
+      6.0,
+      7.0,
+      8.0,
+      9.0,
+      10.0,
+      11.0,
+      12.0,
+      13.0,
+      14.0,
+      15.0,
+      16.0
+    ],
+    "acpr_raw": [
+      -25.78895947003828,
+      -27.23880042232019,
+      -28.805932764812336,
+      -30.480366340446878,
+      -32.24514881431413,
+      -34.07593827189068,
+      -35.94076955827983,
+      -37.80343027511092,
+      -39.63325541125964,
+      -41.4165864537517,
+      -43.16012866250464,
+      -44.88350005754605,
+      -46.608246369136374
+    ],
+    "acpr_dpd": [
+      -4.127575217274047,
+      1.504525882090295,
+      -9.669659283047395,
+      -11.651602307387156,
+      -10.455472714819082,
+      -10.623268569110271,
+      -19.64958598056329,
+      -48.38653895910976,
+      -66.55655983891316,
+      -74.58538180904478,
+      -80.49229121865625,
+      -84.63881691839237,
+      -87.49577219962191
+    ],
+    "recovered_backoff_db": 4.185392271384195
+  }
+}

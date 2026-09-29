@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pa-behavioral-modeling"
+version = "0.1.0"
+description = "Behavioural modelling and digital predistortion of an RF power amplifier, in numpy"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Mohammed Haqib" }]
+keywords = ["rf", "power-amplifier", "behavioral-modeling", "memory-polynomial",
+            "digital-predistortion", "dpd", "6g", "neural-network"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = ["numpy>=1.23"]
+
+[project.optional-dependencies]
+plots = ["matplotlib>=3.6"]
+torch = ["torch>=2.0"]
+dev = ["pytest>=7", "matplotlib>=3.6"]
+
+[tool.setuptools.packages.find]
+include = ["pamodel*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
