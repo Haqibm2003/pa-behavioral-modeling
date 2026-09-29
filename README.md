@@ -54,6 +54,8 @@ wrong, and the test suite asserts the failure.
 
 ### Model accuracy against model size
 
+Measured at **12 dB input back-off**. See the next section for why that matters.
+
 | model | parameters | test NMSE |
 |---|---|---|
 | MP, K=[1], M=1 | 1 | −29.2 dB |
@@ -74,6 +76,44 @@ least-squares solve with no local minima, no learning rate, and reproducibility
 to the last bit.
 
 ![model comparison](figures/02_model_comparison.png)
+
+### …but which model wins depends on the operating point
+
+The table above is measured at 12 dB back-off, where envelope peaks stay below
+saturation. Drive the amplifier harder and the ranking changes. Run
+`python scripts/backoff_comparison.py` to reproduce:
+
+| model | parameters | 12 dB back-off<br>(peak 0.80) | 6 dB back-off<br>(peak 1.60) |
+|---|---|---|---|
+| MP, K=[1,3,5,7], M=5 | 20 | **−73.7 dB** | −42.2 dB |
+| MP, K=[1..11], M=5 | 30 | **−74.4 dB** | −59.3 dB |
+| TDNN, hidden 16×16 | 722 | −52.6 dB | −53.0 dB |
+| TDNN, hidden 32×32 | 1954 | −55.6 dB | −57.6 dB |
+
+Below saturation the polynomial dominates by ~19 dB. Pushed into saturation its
+advantage collapses: the 20-coefficient polynomial falls to −42.2 dB and is now
+beaten by a 722-parameter network by 11 dB, while the networks barely move.
+
+The same reversal shows in how polynomial accuracy responds to the sharpness of
+the saturation knee (Rapp `p`, larger meaning a harder corner):
+
+| Rapp p | 12 dB back-off | 6 dB back-off |
+|---|---|---|
+| 1 | −69.7 dB | −57.8 dB |
+| 2 | −74.4 dB | −59.3 dB |
+| 4 | −75.5 dB | −48.6 dB |
+| 10 | −75.5 dB | **−41.0 dB** |
+
+Below saturation a sharper knee is *easier* to model, because the amplifier
+never reaches the corner and behaves almost linearly. Above saturation it is
+much harder, and the polynomial loses 16 dB going from `p=2` to `p=10`. A
+polynomial basis converges slowly on a near-discontinuity — the same reason
+Fourier series struggle at a step — and that is precisely the regime where a
+neural model earns its parameters.
+
+**The honest summary: a memory polynomial is the right default, and reaching for
+a network before checking it is a mistake. The network earns its keep only when
+the amplifier is driven hard into a sharp saturation.**
 
 ---
 
